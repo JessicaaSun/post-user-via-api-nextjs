@@ -12,8 +12,8 @@ export default function Users() {
     email: Yup.string().email("Invalid email address"),
     password: Yup.string().min(4, "Must be at least 4 characters long"),
     // description: Yup.string().required("Description can't be empty"),
-    roleId: Yup.number().positive().integer(),
-    avatar: Yup.string().required("Avatar can not be blank"),
+    role: Yup.string().required("Role cannot be blank"),
+    avatar: Yup.string().required("Avatar cannot be blank"),
   });
 
   const postUser = (user, resetForm) => {
