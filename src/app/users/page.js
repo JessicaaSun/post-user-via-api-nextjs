@@ -12,7 +12,8 @@ export default function Users() {
     email: Yup.string().email("Invalid email address"),
     password: Yup.string().min(4, "Must be at least 4 characters long"),
     // description: Yup.string().required("Description can't be empty"),
-    // categoryId: Yup.number().positive().integer(),
+    roleId: Yup.number().positive().integer(),
+    avatar: Yup.string().required("Avatar can not be blank"),
   });
 
   const postUser = (user, resetForm) => {
@@ -58,9 +59,8 @@ export default function Users() {
               email: "",
               name: "",
               password: "",
-              role: "admin",
-              avatar:
-                "https://i.pinimg.com/736x/98/13/cf/9813cfbee4f8b0ec9fb1c787e01d612a.jpg",
+              role: "customer",
+              avatar: "",
             }}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting, resetForm }) => {
@@ -124,14 +124,36 @@ export default function Users() {
                     className="text-red-500"
                   />
                 </div>
-                {/* <div className="m-5">
-                <Field as="select" name="role">
-                  <option value="1">Electronic</option>
-                  <option value="2">Furniture</option>
-                  <option value="3">Other</option>
-                </Field>
-                <ErrorMessage name="categoryId" />
-              </div> */}
+                <div className="mb-4">
+                  <label htmlFor="name" className="block text-gray-700">
+                    Avatar (URL)
+                  </label>
+                  <Field
+                    type="text"
+                    id="avatar"
+                    name="avatar"
+                    className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  />
+                  <ErrorMessage
+                    name="avatar"
+                    component="div"
+                    className="text-red-500"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="role" className="block text-gray-700">
+                    Role
+                  </label>
+                  <Field
+                    as="select"
+                    className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    name="role"
+                  >
+                    <option value="customer">Customer</option>
+                    <option value="admin">Admin</option>
+                  </Field>
+                  <ErrorMessage name="roleId" />
+                </div>
                 <div className="flex justify-center">
                   <Button
                     type="submit"
